@@ -40,14 +40,16 @@ struct CellOperatorContent: View {
 }
 
 struct ContentView: View {
+    @State private var formula = ""
     var body: some View {
         VStack {
             Spacer()
             
-            Text("90")
-                .font(.system(size: 90))
-                .frame(maxWidth: .infinity, alignment: .trailing)
+            TextField("00", text: $formula)
+                .font(.system(size: 80))
+                .multilineTextAlignment(.trailing)
                 .padding()
+                // .frame(maxWidth: .infinity, alignment: .bottomTrailing)
             
             Grid {
                 GridRow {
@@ -69,9 +71,9 @@ struct ContentView: View {
                     CellOperatorContent(oper: "+")
                 }
                 GridRow {
-                    CellOperatorContent(oper: "÷")
+                    CellOperatorContent(oper: formula.isEmpty ? "AC" : "C")
                     CellNumberContent(index: 0)
-                    CellOperatorContent(oper: ".")
+                    CellOperatorContent(oper: "÷")
                     CellOperatorContent(oper: "=")
                 }
                 
