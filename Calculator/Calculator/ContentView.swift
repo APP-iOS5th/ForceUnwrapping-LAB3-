@@ -4,14 +4,16 @@ struct ContentView: View {
     // 계산기 버튼 목록
     //@State var cChange: Bool = false
     //@State var cAndAC = "AC"
-    var buttons = [
-        ["C", "+/-", "%", "/"],
+    @State var buttons = [
+        ["AC", "+/-", "%", "/"],
         ["7", "8", "9", "X"],
         ["4", "5", "6", "-"],
         ["1", "2", "3", "+"],
         ["0", ".", "="]
     ]
-    
+//    init() {
+//        buttons[0][0] = "AC"
+//    }
     // 현재 화면에 표시될 값
     @State var display = "0"
     // 첫 번째 피연산자
@@ -35,7 +37,6 @@ struct ContentView: View {
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, maxHeight: 50, alignment: .trailing)
                 .padding(.trailing, 20)
-            
             
             // 계산기 버튼 그리드
             ForEach(buttons, id: \.self) { row in
@@ -73,9 +74,18 @@ struct ContentView: View {
                 }
             }
             
+            
         } //:VSTACK
         .padding(15)
         .background(Color.black)
+        .onChange(of: display){ new, index in
+            if index != "0" {
+                buttons[0][0] = "C"
+            }else{
+                buttons[0][0] = "AC"
+            }
+            
+        }
         
     }
     
@@ -86,7 +96,7 @@ struct ContentView: View {
         switch button {
         case "X", "-", "+", "=", "/":
             return Color.orange
-        case "C", "+/-", "%":
+        case "C", "+/-", "%", "AC":
             return Color.gray
         default:
             return Color.secondary
@@ -96,7 +106,7 @@ struct ContentView: View {
     // 계산기 버튼 클릭 핸들러
     func handleButtonPress(_ button: String) {
         switch button {
-        case "C":
+        case "C", "AC":
             // "C" 버튼: 화면 초기화
             display = "0"
             operand1 = ""
