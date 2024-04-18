@@ -27,10 +27,10 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 12) {
             Spacer()
-                .frame(height: 100)
+                .frame(maxHeight: .infinity)
             Text(display)
                 .foregroundColor(.white)
-                .font(.largeTitle)
+                .font(.system(size: 60))
                 .fontWeight(.bold)
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, maxHeight: 50, alignment: .trailing)
@@ -72,10 +72,13 @@ struct ContentView: View {
                     }
                 }
             }
+            
         } //:VSTACK
         .padding(15)
         .background(Color.black)
+        
     }
+    
     
     
     // 버튼 배경 색상
@@ -103,17 +106,33 @@ struct ContentView: View {
         case "X", "-", "+","/":
             // 연산자 버튼: 피연산자 설정
             operation = button
-            operand1 = display
+            if operand1 != "" {
+                operand2 = display
+                display = calculate(x: operand1, y: display)
+                operand1 = display
+                
+            }else{
+                operand1 = display
+            }
             clearDisplay = true
         case "=":
             // "=" 버튼: 계산 수행
             operand2 = display
-            let result = calculate()
+            let result = calculate(x: operand1, y: operand2)
             display = result
-            operand1 = ""
-            operand2 = ""
-            operation = ""
+            operand1 = operand2
+            operand2 = result
+            //operation = ""
             clearDisplay = true
+        case "0":
+            if display != "0"{
+                display += button
+            }
+        case ".":
+            if !display.contains("."){
+                display += "."
+            }
+            clearDisplay = false
         default:
             // 숫자나 "." 버튼: 현재 값에 추가
             if clearDisplay {
@@ -126,10 +145,10 @@ struct ContentView: View {
     }
     
     // 계산 함수
-    func calculate() -> String {
+    func calculate(x: String, y: String) -> String {
         // 피연산자와 연산자 추출
         // 올바른 숫자 형식으로 변환하여 계산 수행
-        if let num1 = Double(operand1), let num2 = Double(operand2) {
+        if let num1 = Double(x), let num2 = Double(y) {
             switch operation {
             case "X":
                 return String(num1 * num2)
@@ -147,6 +166,8 @@ struct ContentView: View {
             return "0"
         }
     }
+    
+    
 }
 
 
