@@ -4,7 +4,7 @@
 //
 //  Created by 이서경 on 4/18/24.
 //
-// 음수 입력을 받도록 수정해야 함(완)
+// 음수 입력을 받도록 수정해야 함(다시 수정 완)
 // .이 눌리면 자동으로 0.이 나오도록 수정하고 싶음(완)
 // =을 눌러 결과값이 나온 상태 그대로 연산자를 눌러 다음 계산을 이어나가고 싶은데 동작하지 않음,,
 // .2*3 만 0.600000000... 이렇게 값이 나오는 이유? 나머지 소수점은 잘 작동하는 것 같은데..
@@ -76,7 +76,12 @@ struct ContentView: View {
             if currentInput.isEmpty {
                 currentInput = "-"
                 showNum = currentInput
+            } else {
+                currentOperator = Character(button)
+                storedValue = showNum
+                currentInput = ""
             }
+
         default:
             if button == "." {
                 if currentInput.isEmpty {
