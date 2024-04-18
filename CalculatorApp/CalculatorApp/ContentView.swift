@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var inputNumber = ""
-    @State var calculatedNumber: Double?
+    @State var calculatedNumber: Double = 0.0
     
     let buttonName = ["7", "8", "9", "/", "4", "5", "6", "*", "1","2","3","-",".","0","C","+"]
     let columns: [GridItem] = Array(repeating: GridItem(.flexible()), count: 4)
@@ -34,9 +34,6 @@ struct ContentView: View {
                                 inputNumber += buttonName[index]
                             }
                         }
-                        
-                        
-                    
                         else {
                             inputNumber += buttonName[index]}
                     }) {
@@ -50,14 +47,17 @@ struct ContentView: View {
                 }
             }
             
-            Button(action: {calculateResult()}) {
+            
+            Button(action: {
+                if !inputNumber.isEmpty {
+                    calculateResult()}}) {
                 Text("계산하기")
                     .font(.system(size: 30))
             }
             HStack{
-                Text("  =")
+                Text("   =")
                 Spacer()
-                Text("\(calculatedNumber ?? 0)")
+                Text("\(calculatedNumber)")
                     
             }
             .font(.system(size: 40))
@@ -82,6 +82,7 @@ struct ContentView: View {
  3. 아무것도 없을 때 계산하기 누르면 에러 남
  
  2번 에러는 해결했는데 에러 케이스를 만든 것은 아님
+ 3번 에러는 if !inputNumber.isEmpty 로 해결
 */
 
 
