@@ -7,7 +7,7 @@
 // 음수 입력을 받도록 수정해야 함(다시 수정 완)
 // .이 눌리면 자동으로 0.이 나오도록 수정하고 싶음(완)
 // =을 눌러 결과값이 나온 상태 그대로 연산자를 눌러 다음 계산을 이어나가고 싶은데 동작하지 않음,,(엥 아까도 해본 건데 preview canvas 말고 시뮬레이터로 하니까 됨)
-// .2*3,.2*7 만 0.600000000..., 1.400000000 이렇게 값이 나오는 이유?
+// 0.2*3,.02*7 만 0.600000000..., 1.400000000 이렇게 값이 나오는 이유?
 
 import SwiftUI
 
@@ -66,7 +66,7 @@ struct ContentView: View {
             storedValue = ""
             currentOperator = nil
         case "+", "*", "/":
-            if Double(currentInput) != nil {
+            if let inputNum = Decimal(string: currentInput) {
                 calculate()
                 currentOperator = Character(button)
                 storedValue = showNum
@@ -77,6 +77,7 @@ struct ContentView: View {
                 currentInput = "-"
                 showNum = currentInput
             } else {
+                calculate()
                 currentOperator = Character(button)
                 storedValue = showNum
                 currentInput = ""
@@ -106,12 +107,12 @@ struct ContentView: View {
     
     func calculate() {
         guard let tappedOperator = currentOperator,
-              let storedNum = Double(storedValue),
-              let inputNum = Double(currentInput) else {
+              let storedNum = Decimal(string: storedValue),
+              let inputNum = Decimal(string: currentInput) else {
             return
         }
         
-        var result: Double = 0.0
+        var result: Decimal = 0.0
         switch tappedOperator {
         case "+":
             result = storedNum + inputNum
@@ -130,14 +131,8 @@ struct ContentView: View {
             break
         }
         
-        if result == floor(result) {
-            showNum = "\(Int(result))"
-        } else {
-            showNum = "\(result)"
-        }
-        
+        showNum = "\(result)"
         storedValue = showNum
-        currentOperator = nil
     }
 }
 
