@@ -11,9 +11,9 @@ struct ContentView: View {
         ["1", "2", "3", "+"],
         ["0", ".", "="]
     ]
-//    init() {
-//        buttons[0][0] = "AC"
-//    }
+    //    init() {
+    //        buttons[0][0] = "AC"
+    //    }
     // 현재 화면에 표시될 값
     @State var display = "0"
     // 첫 번째 피연산자
@@ -143,6 +143,14 @@ struct ContentView: View {
                 display += "."
             }
             clearDisplay = false
+        case "+/-":
+            if let num = Double(display){
+                
+                display = String(num*(-1))
+                
+            }
+        case "%":
+            display = String(Double(display)! / 100)
         default:
             // 숫자나 "." 버튼: 현재 값에 추가
             if clearDisplay {
