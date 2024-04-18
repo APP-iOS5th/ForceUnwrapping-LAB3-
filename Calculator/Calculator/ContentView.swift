@@ -2,8 +2,6 @@ import SwiftUI
 
 struct ContentView: View {
     // 계산기 버튼 목록
-    //@State var cChange: Bool = false
-    //@State var cAndAC = "AC"
     @State var buttons = [
         ["AC", "+/-", "%", "/"],
         ["7", "8", "9", "X"],
@@ -11,20 +9,16 @@ struct ContentView: View {
         ["1", "2", "3", "+"],
         ["0", ".", "="]
     ]
-    //    init() {
-    //        buttons[0][0] = "AC"
-    //    }
-    // 현재 화면에 표시될 값
-    @State var display = "0"
-    // 첫 번째 피연산자
-    @State var operand1 = ""
-    // 두 번째 피연산자
-    @State var operand2 = ""
-    // 현재 선택된 연산자
-    @State var operation = ""
-    // 화면 초기화 여부
-    @State var clearDisplay = true
+    @State var operations = ["/", "X", "-", "+"]
+    @State var keyVaule: [String:Bool] = ["/":false, "X":false,"-":false,"+":false ]
     
+    @State var display = "0" // 현재 화면에 표시될 값
+    @State var operand1 = "" // 첫 번째 피연산자
+    @State var operand2 = "" // 두 번째 피연산자
+    @State var result = "" //계산한 값 저장
+    @State var operation = "" // 현재 선택된 연산자
+    @State var clearDisplay = true // 화면 초기화 여부
+    @State var toggle: Bool = false
     
     var body: some View {
         VStack(spacing: 12) {
@@ -45,20 +39,26 @@ struct ContentView: View {
                         Button(action: {
                             // 버튼 클릭 핸들러
                             handleButtonPress(button)
+                            if operations.contains(button){
+                            keyVaule = ["/":false, "X":false,"-":false,"+":false ]
+                                keyVaule[button]?.toggle()
+
+                            }else{
+                            keyVaule = ["/":false, "X":false,"-":false,"+":false ]
+                            }
+                            
                         }, label: {
                             if button != "0"{
-                                
                                 Text(button)
                                     .font(.title)
                                     .fontWeight(.semibold)
                                     .frame(width: 80, height: 80)
-                                    .background(buttonBackground(button))
-                                    .foregroundColor(.white)
+                                    .background(operations.contains(button) ? (keyVaule[button]! ? .white : buttonBackground(button)) : buttonBackground(button) )
+                                    .foregroundColor(operations.contains(button) ? (keyVaule[button]! ? buttonBackground(button) : .white) : .white)
                                     .cornerRadius(60)
-                                
-                            }else{
-                                
-                                
+                               
+                                    
+                            }else {
                                 
                                 Text(button)
                                     .font(.title)
@@ -67,14 +67,11 @@ struct ContentView: View {
                                     .background(buttonBackground(button))
                                     .foregroundColor(.white)
                                     .cornerRadius(60)
-                                
                             }
                         })
                     }
                 }
             }
-            
-            
         } //:VSTACK
         .padding(15)
         .background(Color.black)
@@ -113,30 +110,38 @@ struct ContentView: View {
             operand2 = ""
             operation = ""
             clearDisplay = true
+            
         case "X", "-", "+","/":
             // 연산자 버튼: 피연산자 설정
             operation = button
-            if operand1 != "" {
-                operand2 = display
-                display = calculate(x: operand1, y: display)
-                operand1 = display
-                
-            }else{
-                operand1 = display
-            }
             clearDisplay = true
+            if operand1 == ""{ //3  2
+                operand1 = display // o1 o2 => 결과
+            }else{
+                operand1 = calculate(x: operand1, y: display)
+                display = operand1
+            }
+            
         case "=":
             // "=" 버튼: 계산 수행
-            operand2 = display
-            let result = calculate(x: operand1, y: operand2)
-            display = result
-            operand1 = operand2
-            operand2 = result
-            //operation = ""
-            clearDisplay = true
+            if operand1 != ""{
+                if operand2 != "" && operation != "" {
+                    operand1 = display
+                }else{
+                    operand2 = display
+                }
+                display = calculate(x: operand1, y: operand2)
+                clearDisplay = true
+            }
+    
         case "0":
             if display != "0"{
-                display += button
+                if clearDisplay {
+                    display = button
+                    clearDisplay = false
+                } else {
+                    display += button
+                }
             }
         case ".":
             if !display.contains("."){
@@ -145,9 +150,7 @@ struct ContentView: View {
             clearDisplay = false
         case "+/-":
             if let num = Double(display){
-                
                 display = String(num*(-1))
-                
             }
         case "%":
             display = String(Double(display)! / 100)
@@ -157,7 +160,11 @@ struct ContentView: View {
                 display = button
                 clearDisplay = false
             } else {
-                display += button
+                if display == "0"{
+                    display = button
+                }else{
+                    display += button
+                }
             }
         }
     }
@@ -169,13 +176,17 @@ struct ContentView: View {
         if let num1 = Double(x), let num2 = Double(y) {
             switch operation {
             case "X":
-                return String(num1 * num2)
+                return indDouble(d: num1 * num2)
             case "-":
-                return String(num1 - num2)
+                return indDouble(d: num1 - num2)
             case "+":
-                return String(num1 + num2)
+                return indDouble(d: num1 + num2)
             case "/":
-                return String(num1 / num2)
+                if x != "0" || y != "0" {
+                    return indDouble(d: num1 / num2)
+                }else{
+                    return "0"
+                }
             default:
                 return "0"
             }
@@ -184,8 +195,25 @@ struct ContentView: View {
             return "0"
         }
     }
-    
-    
+    func indDouble(d: Double) -> String{
+        let a = d * 10000
+        let b = Int(d) * 10000
+        if a == Double(b) {
+            return String(b/10000)
+        }else{
+            return String(a/10000)
+        }
+    }
+//    func checkOper(a: String) -> () {
+//        for i in 0..<4{
+//            if keyVaule[i].key == a {
+//                keyVaule[i]!.value = true
+//            }else{
+//                keyVaule[i]!.value = false
+//            }
+//        }
+//    }
+
 }
 
 
