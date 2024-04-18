@@ -108,7 +108,7 @@ struct ContentView: View {
             operation = button
             if operand1 != "" {
                 operand2 = display
-                display = calculate(x: operand1, y: display)
+                display = calculate(x: operand1, y: operand2)
                 operand1 = display
                 
             }else{
@@ -120,9 +120,9 @@ struct ContentView: View {
             operand2 = display
             let result = calculate(x: operand1, y: operand2)
             display = result
-            operand1 = operand2
-            operand2 = result
-            //operation = ""
+            operand1 = ""
+            operand2 = ""
+            operation = ""
             clearDisplay = true
         case "0":
             if display != "0"{
