@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var inputNumber = ""
+    @State var inputNumber = "0"
     @State var calculatedNumber: Double = 0.0
     
     let buttonName = ["7", "8", "9", "/", "4", "5", "6", "*", "1","2","3","-",".","0","C","+"]
@@ -19,7 +19,7 @@ struct ContentView: View {
                 Rectangle()
                     .frame(height: 100)
                     .opacity(0)
-                    .border(Color.black, width: 3)
+                    .border(Color.black, width: 5)
                     .overlay(Text(inputNumber).font(.largeTitle))
             }
             
@@ -33,7 +33,12 @@ struct ContentView: View {
                             if inputNumber.last != "." {
                                 inputNumber += buttonName[index]
                             }
+                        } else if ["/","*","-", "+"].contains(buttonName[index]) {
+                            if !["/","*","-", "+"].contains(inputNumber.last) {
+                                inputNumber += buttonName[index]
+                            }
                         }
+                        
                         else {
                             inputNumber += buttonName[index]}
                     }) {
@@ -72,6 +77,8 @@ struct ContentView: View {
             // if let : 수식의 결과가 유효한 Double 일 경우에만 result에 값을 반환한다.
             // as? : 계산 결과를 Double로 타입 캐스트 수행하며 실패할 경우 nil을 반환한다
             calculatedNumber = result
+        } else if let result = expression.expressionValue(with: nil, context: nil) as? Int {
+            calculatedNumber = Double(result)
         }
     }
 }
@@ -80,9 +87,11 @@ struct ContentView: View {
  1. 나누기에 소수점이 안나온다
  2. ..1 값을 넣으면 에러가 발생한다.
  3. 아무것도 없을 때 계산하기 누르면 에러 남
+ 4. 기호가 연속으로 나오면 에러
  
  2번 에러는 해결했는데 에러 케이스를 만든 것은 아님
  3번 에러는 if !inputNumber.isEmpty 로 해결
+ 4번 에러도 해결
 */
 
 
