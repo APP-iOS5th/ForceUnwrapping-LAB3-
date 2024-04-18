@@ -204,16 +204,6 @@ struct ContentView: View {
             return String(a/10000)
         }
     }
-//    func checkOper(a: String) -> () {
-//        for i in 0..<4{
-//            if keyVaule[i].key == a {
-//                keyVaule[i]!.value = true
-//            }else{
-//                keyVaule[i]!.value = false
-//            }
-//        }
-//    }
-
 }
 
 
