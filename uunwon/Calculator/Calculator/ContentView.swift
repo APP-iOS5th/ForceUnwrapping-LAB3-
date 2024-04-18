@@ -41,10 +41,10 @@ struct CellOperatorContent: View {
 
 struct ContentView: View {
     @State private var formula = ""
+    
     var body: some View {
         VStack {
             Spacer()
-            
             TextField("00", text: $formula)
                 .font(.system(size: 80))
                 .multilineTextAlignment(.trailing)
