@@ -12,9 +12,7 @@ struct ContentView: View {
     
     @Query var memos: [Memo]
     @Environment(\.modelContext) var modelContext
-    @State var isSheetShowing: Bool = false
-    @State var memoText: String = ""
-    @State var memoColor: Color = .blue
+    @State var isSheetShowing = false
 
     let colors: [Color] = [.blue, .cyan, .purple, .yellow, .indigo]
     
@@ -34,7 +32,7 @@ struct ContentView: View {
                     }
                     .padding()
                     .foregroundStyle(.white)
-                    .background(.purple)
+                    .background(memo.color)
                     .shadow(radius: 3)
                     .padding()
                     .contextMenu {
@@ -61,7 +59,7 @@ struct ContentView: View {
                 }
             }//toolbar
             .sheet(isPresented: $isSheetShowing) {
-                MemoAddView(colors: colors, isSheetShowing: $isSheetShowing, memoText: $memoText, memoColor: $memoColor)
+                MemoAddView(isSheetShowing: $isSheetShowing)
             }//sheet
         }//NavigationStack
     }
