@@ -57,8 +57,8 @@
 			children = (
 				1859239D2BD6357A000563A0 /* MememoApp.swift */,
 				1859239F2BD6357A000563A0 /* ContentView.swift */,
-				185923AB2BD637C2000563A0 /* MemoStore.swift */,
 				185923AD2BD63CB1000563A0 /* MemoAddView.swift */,
+				185923AB2BD637C2000563A0 /* MemoStore.swift */,
 				185923A12BD6357B000563A0 /* Assets.xcassets */,
 				185923A32BD6357B000563A0 /* Preview Content */,
 			);
