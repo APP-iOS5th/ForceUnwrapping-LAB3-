@@ -9,6 +9,7 @@
 //일단 동그라미 만들기
 //달력화면을 넣고 해당 날짜가 동그라미로 차면 좋겠다
 
+
 import SwiftUI
 
 struct ContentView: View {
@@ -84,85 +85,8 @@ struct ContentView: View {
     }
 }
 
-struct EditTaskView: View {
-    @Binding var isPresented: Bool
-    @Binding var description: String
-    @Binding var priority: Priority
-    var editTask: () -> Void
-    
-    var body: some View {
-        NavigationStack {
-            VStack {
-                TextField("Enter task", text: $description)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                
-                Picker("Priority", selection: $priority) {
-                    Text("High").tag(Priority.high)
-                    Text("Medium").tag(Priority.medium)
-                    Text("Low").tag(Priority.low)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding()
-                
-                Button("Save") {
-                    editTask()
-                }
-                .padding()
-                
-                Spacer()
-            }
-            .navigationTitle("Edit Task")
-            .toolbar {
-                ToolbarItem {
-                    Button("Cancel") {
-                        isPresented.toggle()
-                    }
-                }
-            }
-        }
-    }
-}
 
-struct AddTaskView: View {
-    @Binding var isPresented: Bool
-    @Binding var description: String
-    @Binding var priority: Priority
-    var addTask: () -> Void
-    
-    var body: some View {
-        NavigationStack {
-            VStack {
-                TextField("Enter task", text: $description)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                
-                Picker("Priority", selection: $priority) {
-                    Text("High").tag(Priority.high)
-                    Text("Medium").tag(Priority.medium)
-                    Text("Low").tag(Priority.low)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding()
-                
-                Button("Add") {
-                    addTask()
-                }
-                .padding()
-                
-                Spacer()
-            }
-            .navigationTitle("Add Task")
-            .toolbar {
-                ToolbarItem {
-                    Button("Cancel") {
-                        isPresented.toggle()
-                    }
-                }
-            }
-        }
-    }
-}
+
 
 #Preview {
     ContentView()

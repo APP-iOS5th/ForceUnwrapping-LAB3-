@@ -12,6 +12,8 @@
 		751FF8F42BDA0EA60046AAFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 751FF8F32BDA0EA60046AAFB /* Assets.xcassets */; };
 		751FF8F82BDA0EA60046AAFB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 751FF8F72BDA0EA60046AAFB /* Preview Assets.xcassets */; };
 		751FF8FF2BDA0F4E0046AAFB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751FF8FE2BDA0F4E0046AAFB /* Task.swift */; };
+		758712632BDA2966003BE6D1 /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758712622BDA2966003BE6D1 /* AddTaskView.swift */; };
+		758712652BDA29A6003BE6D1 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758712642BDA29A6003BE6D1 /* EditTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		751FF8F52BDA0EA60046AAFB /* ToDo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToDo.entitlements; sourceTree = "<group>"; };
 		751FF8F72BDA0EA60046AAFB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		751FF8FE2BDA0F4E0046AAFB /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		758712622BDA2966003BE6D1 /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
+		758712642BDA29A6003BE6D1 /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,8 @@
 				751FF8EF2BDA0EA50046AAFB /* ToDoApp.swift */,
 				751FF8F12BDA0EA50046AAFB /* ContentView.swift */,
 				751FF8FE2BDA0F4E0046AAFB /* Task.swift */,
+				758712622BDA2966003BE6D1 /* AddTaskView.swift */,
+				758712642BDA29A6003BE6D1 /* EditTaskView.swift */,
 				751FF8F32BDA0EA60046AAFB /* Assets.xcassets */,
 				751FF8F52BDA0EA60046AAFB /* ToDo.entitlements */,
 				751FF8F62BDA0EA60046AAFB /* Preview Content */,
@@ -145,6 +151,8 @@
 				751FF8F22BDA0EA50046AAFB /* ContentView.swift in Sources */,
 				751FF8FF2BDA0F4E0046AAFB /* Task.swift in Sources */,
 				751FF8F02BDA0EA50046AAFB /* ToDoApp.swift in Sources */,
+				758712632BDA2966003BE6D1 /* AddTaskView.swift in Sources */,
+				758712652BDA29A6003BE6D1 /* EditTaskView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
