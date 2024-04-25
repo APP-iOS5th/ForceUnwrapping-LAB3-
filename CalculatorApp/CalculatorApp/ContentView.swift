@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var inputNumber = "0"
+    @State var inputNumber = ""
     @State var calculatedNumber: Double = 0.0
     
     let buttonName = ["7", "8", "9", "/", "4", "5", "6", "*", "1","2","3","-",".","0","C","+"]
@@ -27,7 +27,7 @@ struct ContentView: View {
                 ForEach(0..<16, id: \.self) { index in
                     Button(action: {
                         if buttonName[index] == "C"{
-                            inputNumber = ""
+                            inputNumber = "0"
                             calculatedNumber = 0
                         } else if buttonName[index] == "."{
                             if inputNumber.last != "." {
@@ -77,6 +77,7 @@ struct ContentView: View {
             // if let : 수식의 결과가 유효한 Double 일 경우에만 result에 값을 반환한다.
             // as? : 계산 결과를 Double로 타입 캐스트 수행하며 실패할 경우 nil을 반환한다
             calculatedNumber = result
+            
         } else if let result = expression.expressionValue(with: nil, context: nil) as? Int {
             calculatedNumber = Double(result)
         }
@@ -91,7 +92,7 @@ struct ContentView: View {
  
  2번 에러는 해결했는데 에러 케이스를 만든 것은 아님
  3번 에러는 if !inputNumber.isEmpty 로 해결
- 4번 에러도 해결
+ 4번 에러도 해겨
 */
 
 
