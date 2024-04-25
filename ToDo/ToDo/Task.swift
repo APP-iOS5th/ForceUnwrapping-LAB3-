@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum Priority: Comparable, CaseIterable {
+enum Priority {
     case high
     case medium
     case low
 }
 
-struct Task: Identifiable {
+struct Task: Identifiable, Hashable {
     var id = UUID()
     var completed: Bool
     var description: String
