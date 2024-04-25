@@ -41,7 +41,7 @@ struct ContentView: View {
                                 .onTapGesture {
                                     task.completed.toggle()
                                     updateProgress()
-                                    print("\(doneTask)")
+                                    //print("\(doneTask)")
                                 }
                             Text("\(task.description)")
                         }
@@ -53,8 +53,11 @@ struct ContentView: View {
                                 newTaskPriority = task.priority
                             }
                             Button("Delete") {
-                                if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+                                if let index = tasks.firstIndex(where: { $0.id == task.id }) { //아이디가 해당아이디랑 일치하는 태스크 인덱스반환
                                     tasks.remove(at: index)
+                                    doneTask -= 1
+                                    updateProgress()
+                                    //print("\(tasks.count)")
                                 }
                             }
                         }
