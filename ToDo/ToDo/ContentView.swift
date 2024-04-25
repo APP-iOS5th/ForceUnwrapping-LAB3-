@@ -5,11 +5,6 @@
 //  Created by seokyung on 4/25/24.
 //
 
-//우선순위가 높은 걸 위에 띄우기
-//일단 동그라미 만들기
-//달력화면을 넣고 해당 날짜가 동그라미로 차면 좋겠다
-
-
 import SwiftUI
 import AVFoundation
 
@@ -112,6 +107,7 @@ struct ContentView: View {
         let doneTasks = tasks.filter { $0.completed }
         doneTask = doneTasks.count
         donePercent = Int((Double(doneTask) / Double(tasks.count)) * 100)
+        
     }
 }
 
