@@ -4,54 +4,73 @@
 //
 //  Created by seokyung on 4/22/24.
 //
+
+
 import SwiftUI
+import SwiftData
+
 
 struct ContentView: View {
-    @ObservedObject var memoStore: MemoStore = MemoStore()
-    
+    @Query var memos: [Memo]
+    @Environment(\.modelContext) var modelContext
     @State var isSheetShowing: Bool = false
-    @State var memoText: String = ""
-    @State var memoColor: Color = .blue
-    let colors: [Color] = [.blue, .cyan, .purple, .yellow, .indigo]
     
     var body: some View {
         NavigationStack {
-            List(memoStore.memos) { memo in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text("\(memo.text)").font(.title)
-                        Text("\(memo.createdString)").font(.body).padding(.top)
+            List {
+                ForEach(memos) { memo in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("\(memo.text)")
+                                .font(.title)
+                                .foregroundStyle(.black)
+                            Text("\(memo.createdString)")
+                                .font(.body)
+                                .padding(.top)
+                                .foregroundStyle(.black)
+                        }
+                        Spacer()
                     }
-                    Spacer()
-                }
-                .padding()
-                .foregroundColor(.white)
-                .background(memo.color)
-                .shadow(radius: 3)
-                .padding()
-                .contextMenu {
-                    ShareLink(item: memo.text)
-                    Button { memoStore.removeMemo(memo) } label: {
-                        Image(systemName: "trash.slash")
-                        Text("삭제")
+                    .padding()
+                    .foregroundStyle(.white)
+                    .background(memo.color)
+                    .shadow(radius: 3)
+                    .padding()
+                    .contextMenu {
+                        ShareLink(item: memo.text)
+                        Button {
+                            removeMemo(memo)
+                        } label:  {
+                            Image(systemName: "trash.slash")
+                            Text("삭제")
+                        }
                     }
                 }
             }
             .listStyle(.plain)
             .navigationTitle("mememo")
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("추가") { memoText = ""; isSheetShowing = true }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        isSheetShowing = true
+                    } label : {
+                        Image(systemName: "plus")
+                    }
                 }
             }
             .sheet(isPresented: $isSheetShowing) {
-                MemoAddView(memoStore: memoStore, isSheetShowing: $isSheetShowing, memoText: $memoText, memoColor: $memoColor, colors: colors)
+                MemoAddView(/*colors: colors,*/ isSheetShowing: $isSheetShowing)
             }
         }
-        
     }
+    
+    func removeMemo(_ memo: Memo) {
+        modelContext.delete(memo)
+    }
+    
 }
 
 #Preview {
     ContentView()
+        .modelContainer(for: Memo.self)
 }
