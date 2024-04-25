@@ -11,6 +11,7 @@
 		1802A6CA2BDA0E5B0041989C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1802A6C92BDA0E5B0041989C /* ContentView.swift */; };
 		1802A6CC2BDA0E5C0041989C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1802A6CB2BDA0E5C0041989C /* Assets.xcassets */; };
 		1802A6D02BDA0E5C0041989C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1802A6CF2BDA0E5C0041989C /* Preview Assets.xcassets */; };
+		1802A6D72BDA0F5E0041989C /* TaskInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1802A6D62BDA0F5E0041989C /* TaskInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		1802A6CB2BDA0E5C0041989C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1802A6CD2BDA0E5C0041989C /* TodoList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TodoList.entitlements; sourceTree = "<group>"; };
 		1802A6CF2BDA0E5C0041989C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1802A6D62BDA0F5E0041989C /* TaskInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				1802A6C72BDA0E5B0041989C /* TodoListApp.swift */,
 				1802A6C92BDA0E5B0041989C /* ContentView.swift */,
+				1802A6D62BDA0F5E0041989C /* TaskInfo.swift */,
 				1802A6CB2BDA0E5C0041989C /* Assets.xcassets */,
 				1802A6CD2BDA0E5C0041989C /* TodoList.entitlements */,
 				1802A6CE2BDA0E5C0041989C /* Preview Content */,
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1802A6CA2BDA0E5B0041989C /* ContentView.swift in Sources */,
+				1802A6D72BDA0F5E0041989C /* TaskInfo.swift in Sources */,
 				1802A6C82BDA0E5B0041989C /* TodoListApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
