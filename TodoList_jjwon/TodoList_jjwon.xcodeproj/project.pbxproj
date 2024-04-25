@@ -11,7 +11,7 @@
 		4ADD36EC2BDA0D64001A5E8C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD36EB2BDA0D64001A5E8C /* ContentView.swift */; };
 		4ADD36EE2BDA0D67001A5E8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4ADD36ED2BDA0D67001A5E8C /* Assets.xcassets */; };
 		4ADD36F12BDA0D67001A5E8C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4ADD36F02BDA0D67001A5E8C /* Preview Assets.xcassets */; };
-		4ADD36F82BDA0DAB001A5E8C /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD36F72BDA0DAB001A5E8C /* Task.swift */; };
+		4ADD36F82BDA0DAB001A5E8C /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD36F72BDA0DAB001A5E8C /* Todo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,7 +20,7 @@
 		4ADD36EB2BDA0D64001A5E8C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4ADD36ED2BDA0D67001A5E8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4ADD36F02BDA0D67001A5E8C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		4ADD36F72BDA0DAB001A5E8C /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		4ADD36F72BDA0DAB001A5E8C /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +55,7 @@
 			children = (
 				4ADD36E92BDA0D64001A5E8C /* TodoList_jjwonApp.swift */,
 				4ADD36EB2BDA0D64001A5E8C /* ContentView.swift */,
-				4ADD36F72BDA0DAB001A5E8C /* Task.swift */,
+				4ADD36F72BDA0DAB001A5E8C /* Todo.swift */,
 				4ADD36ED2BDA0D67001A5E8C /* Assets.xcassets */,
 				4ADD36EF2BDA0D67001A5E8C /* Preview Content */,
 			);
@@ -141,7 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4ADD36EC2BDA0D64001A5E8C /* ContentView.swift in Sources */,
-				4ADD36F82BDA0DAB001A5E8C /* Task.swift in Sources */,
+				4ADD36F82BDA0DAB001A5E8C /* Todo.swift in Sources */,
 				4ADD36EA2BDA0D64001A5E8C /* TodoList_jjwonApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

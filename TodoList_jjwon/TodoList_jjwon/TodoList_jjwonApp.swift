@@ -13,6 +13,7 @@ struct TodoList_jjwonApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .modelContainer(for: Todo.self)
         }
         
     }

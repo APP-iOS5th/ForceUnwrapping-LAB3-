@@ -7,13 +7,16 @@
 
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
     
-    @State var tasks = Task.tasks.sorted(by: { $0.priority < $1.priority })
+    @Query var todos: [Todo]
+    @Environment(\.modelContext) var modelContext
+        
     @State private var showingAddSheet = false
-    @State private var newTaskDescription = ""
-    @State private var newTaskPriority: Priority = .medium
+    @State private var newTodoDescription = ""
+    @State private var newTodoPriority: Priority = .medium
     
     
     var body: some View {
@@ -21,31 +24,34 @@ struct ContentView: View {
             List {
                 
                 Section(header: Text("High Priority")) {
-                    ForEach($tasks.filter { $0.priority.wrappedValue == .high }) { task in
-                        TaskRow(task: task)
+                    ForEach(todos.filter { $0.priority == .high }) { todo in
+                        TaskRow(todo: todo)
                     }
                     .onDelete { indexSet in
-                        tasks.remove(atOffsets: indexSet)
+                        let todo = todos[indexSet.first ?? 0]
+                        modelContext.delete(todo)
                     }
                     .padding()
                 }
                 
                 Section(header: Text("Medium Priority")) {
-                    ForEach($tasks.filter { $0.priority.wrappedValue == .medium }) { task in
-                        TaskRow(task: task)
+                    ForEach(todos.filter { $0.priority == .medium }) { todo in
+                        TaskRow(todo: todo)
                     }
                     .onDelete { indexSet in
-                        tasks.remove(atOffsets: indexSet)
-                    }
+                    let todo = todos[indexSet.first ?? 0]
+                    modelContext.delete(todo)
+                }
                     .padding()
                 }
                 
                 Section(header: Text("Low Priority")) {
-                    ForEach($tasks.filter { $0.priority.wrappedValue == .low }) { task in
-                        TaskRow(task: task)
+                    ForEach(todos.filter { $0.priority == .low }) { todo in
+                        TaskRow(todo: todo)
                     }
                     .onDelete { indexSet in
-                        tasks.remove(atOffsets: indexSet)
+                        let todo = todos[indexSet.first ?? 0]
+                        modelContext.delete(todo)
                     }
                     .padding()
                 }
@@ -63,9 +69,9 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $showingAddSheet) {
-                AddTaskView(
-                    newTaskDescription: $newTaskDescription,
-                    newTaskPriority: $newTaskPriority,
+                AddTodoView(
+                    newTodoDescription: $newTodoDescription,
+                    newTodoPriority: $newTodoPriority,
                     showingAddSheet: $showingAddSheet,
                     addTodoItem: addTodoItem)
                 .presentationDetents([.medium])
@@ -73,42 +79,42 @@ struct ContentView: View {
             
         }//NavigationStack
     }
-    private func addTodoItem(description: String, priority: Priority) {
-        let newTask = Task(completed: false, description: description, priority: priority)
-        tasks.append(newTask)
+    private func addTodoItem(todoDescription: String, priority: Priority) {
+        let newTodo = Todo(completed: false, todoDescription: todoDescription, priority: priority)
+        modelContext.insert(newTodo)
     }
 }
 
 struct TaskRow: View {
-    @Binding var task: Task
+    var todo: Todo
     
     var body: some View {
         HStack {
             Button {
-                task.completed.toggle()
+                todo.completed.toggle()
             } label: {
-                Image(systemName: task.completed ? "checkmark.circle.fill" : "circle")
+                Image(systemName: todo.completed ? "checkmark.circle.fill" : "circle")
             }
-            Text(task.description)
+            Text(todo.todoDescription)
             Spacer()
         }
     }
 }
 
-struct AddTaskView: View {
-    @Binding var newTaskDescription: String
-    @Binding var newTaskPriority: Priority
+struct AddTodoView: View {
+    @Binding var newTodoDescription: String
+    @Binding var newTodoPriority: Priority
     @Binding var showingAddSheet: Bool
     let addTodoItem: (String, Priority) -> Void
     
     var body: some View {
         VStack(alignment: .leading) {
-            TextField("할일을 적어주세요.", text: $newTaskDescription)
+            TextField("할일을 적어주세요.", text: $newTodoDescription)
                 .padding()
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(10)
             
-            Picker("Priority", selection: $newTaskPriority) {
+            Picker("Priority", selection: $newTodoPriority) {
                 ForEach(Priority.allCases, id: \.self) { priority in
                     Text(String(describing: priority))
                 }
@@ -129,7 +135,7 @@ struct AddTaskView: View {
                 }
                 
                 Button(action: {
-                    addTodoItem(newTaskDescription, newTaskPriority)
+                    addTodoItem(newTodoDescription, newTodoPriority)
                     showingAddSheet = false
                 }) {
                     Text("할일 추가")
