@@ -13,7 +13,7 @@ enum Priority {
     case low
 }
 
-struct Task: Identifiable, Hashable {
+struct Task: Identifiable {
     var id = UUID()
     var completed: Bool
     var description: String

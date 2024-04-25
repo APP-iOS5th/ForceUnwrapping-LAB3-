@@ -48,7 +48,6 @@ struct ContentView: View {
                                     updateProgress()
                                     print("\(doneTask)")
                                 }
-                                .contentShape(Rectangle())
                             Text("\(task.description)")
                         }
                         .frame(height: 50)
